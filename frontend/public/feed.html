@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chatterra</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@300;400;500;600&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="./stylesheets/feed.css">
+</head>
+
+<body>
+    <div class="app">
+
+        <!-- ════ SIDEBAR ════ -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sb-logo">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.8" />
+                    <circle cx="12" cy="12" r="6" stroke="currentColor" stroke-width="1.4" />
+                    <circle cx="12" cy="12" r="2.5" fill="currentColor" />
+                    <line x1="2" y1="12" x2="22" y2="12" stroke="currentColor" stroke-width="1.3" />
+                    <line x1="12" y1="2" x2="12" y2="22" stroke="currentColor" stroke-width="1.3" />
+                </svg>
+                Chatterra
+            </div>
+            <nav class="sb-nav">
+                <button class="sb-item active" onclick='window.location.replace("/feed.html")'>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                        <polyline points="9 22 9 12 15 12 15 22" />
+                    </svg>
+                    Home
+                    </a>
+                    <button class="sb-item" id="profile-button">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                            <circle cx="12" cy="7" r="4" />
+                        </svg>
+                        Profile
+                    </button>
+                    <button class="sb-item" onclick='window.location.replace("/chat.html")'>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                        </svg>
+                        Messages
+                    </button>
+                    <button class="sb-item" onclick='window.location.href="/notification.html"'>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                            <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+                        </svg>
+                        Notification
+                    </button>
+                    <button class="sb-item" onclick='window.location.replace("/setting.html")'>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="3" />
+                            <path
+                                d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+                        </svg>
+                        Settings
+                    </button>
+            </nav>
+            <div class="sb-bottom">
+                <div class="sb-profile">
+                    <div class="sb-avi" id="profile-photo-header">
+                        <img src="" alt="">
+                    </div>
+                    <div>
+                        <div class="sb-profile-name" id="profile-name-header"></div>
+                        <div class="sb-profile-handle" id="profile-username-header"></div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        <div class="sb-overlay" id="sbOverlay" onclick="closeSidebar()"></div>
+
+        <!-- ════ MAIN ════ -->
+        <div class="main">
+
+            <!-- TOPBAR -->
+            <header class="topbar">
+                <div class="topbar-left">
+                    <button class="hamburger icon-btn" id="hamburger" onclick="toggleSidebar()">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round">
+                            <line x1="3" y1="6" x2="21" y2="6" />
+                            <line x1="3" y1="12" x2="21" y2="12" />
+                            <line x1="3" y1="18" x2="21" y2="18" />
+                        </svg>
+                    </button>
+                    <span class="topbar-title">Home</span>
+                </div>
+                <div class="topbar-right">
+                    <!-- dark/light toggle -->
+                    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="Toggle theme">
+                        <div class="theme-toggle-knob" id="themeKnob">
+                            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5" stroke-linecap="round" id="themeKnobIcon">
+                                <circle cx="12" cy="12" r="5" />
+                                <line x1="12" y1="1" x2="12" y2="3" />
+                                <line x1="12" y1="21" x2="12" y2="23" />
+                                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                                <line x1="1" y1="12" x2="3" y2="12" />
+                                <line x1="21" y1="12" x2="23" y2="12" />
+                                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+                            </svg>
+                        </div>
+                    </button>
+                </div>
+            </header>
+
+            <!-- FEED -->
+            <div class="feed-wrap" id="feedWrap">
+
+                <!-- SKELETON post modal -->
+                <div class="skel-card" id="sk1">
+                    <div class="skel-header">
+                        <div class="skel skel-avi"></div>
+                        <div class="skel-lines">
+                            <div class="skel skel-line-a"></div>
+                            <div class="skel skel-line-b"></div>
+                        </div>
+                    </div>
+                    <div class="skel skel-img"></div>
+                    <div class="skel-act">
+                        <div class="skel skel-btn"></div>
+                        <div class="skel skel-btn"></div>
+                    </div>
+                    <div class="skel-cap">
+                        <div class="skel skel-cap-a"></div>
+                        <div class="skel skel-cap-b"></div>
+                    </div>
+                </div>
+                <!-- <div class="skel-card" id="sk2">
+                    <div class="skel-header">
+                        <div class="skel skel-avi"></div>
+                        <div class="skel-lines">
+                            <div class="skel skel-line-a"></div>
+                            <div class="skel skel-line-b"></div>
+                        </div>
+                    </div>
+                    <div class="skel skel-img"></div>
+                    <div class="skel-act">
+                        <div class="skel skel-btn"></div>
+                        <div class="skel skel-btn"></div>
+                    </div>
+                    <div class="skel-cap">
+                        <div class="skel skel-cap-a"></div>
+                        <div class="skel skel-cap-b"></div>
+                    </div>
+                </div>
+                <div class="skel-card" id="sk3">
+                    <div class="skel-header">
+                        <div class="skel skel-avi"></div>
+                        <div class="skel-lines">
+                            <div class="skel skel-line-a"></div>
+                            <div class="skel skel-line-b"></div>
+                        </div>
+                    </div>
+                    <div class="skel skel-img"></div>
+                    <div class="skel-act">
+                        <div class="skel skel-btn"></div>
+                        <div class="skel skel-btn"></div>
+                    </div>
+                    <div class="skel-cap">
+                        <div class="skel skel-cap-a"></div>
+                        <div class="skel skel-cap-b"></div>
+                    </div>
+                </div> -->
+
+                <!-- EMPTY STATE -->
+                <div class="empty-state display-none" id="emptyState">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.4">
+                        <rect x="3" y="3" width="18" height="18" rx="3" />
+                        <circle cx="8.5" cy="8.5" r="1.5" />
+                        <polyline points="21 15 16 10 5 21" />
+                    </svg>
+                    <p>No posts yet. Hit <strong>+</strong> to share something!</p>
+                </div>
+
+            </div><!-- /feed-wrap -->
+        </div><!-- /main -->
+    </div><!-- /app -->
+
+    <!-- ════ upload user post ════ -->
+    <div class="fab-wrap" id="fabWrap">
+        <div class="fab-ring display-none" id="fabRing"></div>
+        <button class="fab-btn" onclick="openUpload()">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round">
+                <line x1="12" y1="5" x2="12" y2="19" />
+                <line x1="5" y1="12" x2="19" y2="12" />
+            </svg>
+        </button>
+        <div class="fab-tooltip">Upload post</div>
+    </div>
+
+    <!-- ════ COMMENT DRAWER ════ -->
+    <div class="drawer-overlay" id="drawerOverlay" onclick="closeComments()"></div>
+    <div class="comment-drawer" id="commentDrawer">
+        <div class="drawer-handle"></div>
+
+        <div class="drawer-head">
+            Comments
+            <span class="drawer-head-count" id="drawerCount"></span>
+        </div>
+        <div class="comments-list display-none" id="commentsList">
+
+            <div class="comment-item">
+                <div class="comment-item-head">
+                    <div class="comment-avi">
+                        <img src="https://res.cloudinary.com/deklbsgkm/image/upload/default_Photo_insta_iz3kev.jpg"
+                            alt="profile">
+                        <div class="comment-meta-top">
+                            <div class="comment-user">umar</div>
+                            <p class="comment-time-txt">4h ago</p>
+                        </div>
+                    </div>
+                    <div class="comment-body">
+                        <p class="comment-text">this is the testing comment</p>
+                    </div>
+                    <div class="comment-footer">
+                        <button class="pc-act-btn pc-like-btn like-comment liked">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path
+                                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                                </path>
+                            </svg>
+                            <span class="pc-btn-txt" data-field="like-count"
+                                id="like-post-69ceac67fe034ddf0e1a8990">2</span>
+                            <div class="pc-btn-spin"></div>
+                        </button>
+                        <button class="reply-btn" onclick="setReply()">
+                            Reply
+                        </button>
+                    </div>
+                </div>
+                <!-- <div class="replies-container">view <span class="number-repiles-on-comment">1</span> replies </div> -->
+
+                <div class="comment-item-depth-1">
+                    <div class="comment-item-depth-1-space"></div>
+                    <!--  -->
+                    <div class="comment-item">
+                        <div class="comment-item-head">
+                            <div class="comment-avi">
+                                <img src="https://res.cloudinary.com/deklbsgkm/image/upload/default_Photo_insta_iz3kev.jpg"
+                                    alt="profile">
+                                <div class="comment-meta-top">
+                                    <div class="comment-user">umar</div>
+                                    <p class="comment-time-txt">4h ago</p>
+                                </div>
+                            </div>
+                            <div class="comment-body">
+                                <p class="comment-text">this is the testing comment</p>
+                            </div>
+                            <div class="comment-footer">
+                                <button class="pc-act-btn pc-like-btn like-comment liked">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path
+                                            d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                                        </path>
+                                    </svg>
+                                    <span class="pc-btn-txt" data-field="like-count"
+                                        id="like-post-69ceac67fe034ddf0e1a8990">2</span>
+                                    <div class="pc-btn-spin"></div>
+                                </button>
+                                <button class="reply-btn" onclick="setReply()">
+                                    Reply
+                                </button>
+                            </div>
+                        </div>
+                        <!--  -->
+                        <div class="comment-item-depth-2">
+                            <div class="comment-item-depth-2-space"></div>
+                            <div class="comment-item">
+                                <div class="comment-item-head">
+                                    <div class="comment-avi">
+                                        <img src="https://res.cloudinary.com/deklbsgkm/image/upload/default_Photo_insta_iz3kev.jpg"
+                                            alt="profile">
+                                        <div class="comment-meta-top">
+                                            <div class="comment-user">umar</div>
+                                            <p class="comment-time-txt">4h ago</p>
+                                        </div>
+                                    </div>
+                                    <div class="comment-body">
+                                        <p class="comment-text">this is the testing comment</p>
+                                    </div>
+                                    <div class="comment-footer">
+                                        <button class="pc-act-btn pc-like-btn like-comment liked">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                stroke-linejoin="round">
+                                                <path
+                                                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                                                </path>
+                                            </svg>
+                                            <span class="pc-btn-txt" data-field="like-count"
+                                                id="like-post-69ceac67fe034ddf0e1a8990">2</span>
+                                            <div class="pc-btn-spin"></div>
+                                        </button>
+                                        <button class="reply-btn" onclick="setReply()">
+                                            Reply
+                                        </button>
+                                    </div>
+                                </div>
+                                <!-- <div class="replies-container">view <span class="number-repiles-on-comment">1</span>
+                                    replies </div> -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="replies-container">view <span class="number-repiles-on-comment">1</span> replies </div> -->
+
+                </div>
+            </div>
+        </div>
+        <div class="comments-empty">
+            <p>No Comment yet</p>
+        </div>
+        <div class="drawer-input">
+            <div class="text-area-div-comment">
+                <div id="reply-indicator" class="reply-container display-none">
+                    <div class="reply-indicator-overflow">
+                        <div class="reply-content">
+                            <span class="reply-label">Replying to</span>
+                            <span id="reply-user-name" class="reply-user">@username</span>
+                        </div>
+                        <button type="button" id="cancelReply" class="cancel-btn">
+                            <span>&times;</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="comment-total-input display-none">
+                    <p class="comment-total-words"></p>
+                </div>
+                <textarea id="commentInput" placeholder="Add a comment…" rows="1" oninput="autoResize(this)">
+                </textarea>
+            </div>
+            <button class="send-btn" id="sendBtnComment" onclick="sendComment(this)">
+                <div class="send-spin"></div>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="22" y1="2" x2="11" y2="13" />
+                    <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+
+    <!-- ════ UPLOAD MODAL ════ -->
+    <div class="modal-overlay" id="modalOverlay" onclick="handleModalOutside(event)">
+        <div class="modal" id="uploadModal">
+
+            <div class="modal-head">
+                <h2>New Post</h2>
+                <button class="modal-close" onclick="closeUpload()">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round">
+                        <line x1="18" y1="6" x2="6" y2="18" />
+                        <line x1="6" y1="6" x2="18" y2="18" />
+                    </svg>
+                </button>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="modal-user">
+                    <div class="modal-avi">
+                        <img id="modal-avi-img" src="" alt="profile">
+                    </div>
+                    <div>
+                        <div class="modal-audience">🌐
+                            <p id="modal-audience-name"> </p>
+                        </div>
+                        <div class="modal-uname"></div>
+                    </div>
+                </div>
+
+                <!-- DROP ZONE -->
+                <div class="drop-zone" id="dropZone"
+                    ondragover="e=>{e.preventDefault();document.getElementById('dropZone').classList.add('drag');}"
+                    ondragleave="document.getElementById('dropZone').classList.remove('drag')"
+                    ondrop="e=>{e.preventDefault();document.getElementById('dropZone').classList.remove('drag');handleFiles(e.dataTransfer.files);}">
+                    <input type="file" id="fileInput" accept="image/*,video/*" multiple
+                        onchange="handleFiles(this.files)" />
+
+                    <div class="drop-empty" id="dropEmpty">
+                        <div class="drop-icon-bg">
+                            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--accent)"
+                                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="3" width="18" height="18" rx="3" />
+                                <circle cx="8.5" cy="8.5" r="1.5" />
+                                <polyline points="21 15 16 10 5 21" />
+                            </svg>
+                        </div>
+                        <h3>Drop photos or videos</h3>
+                        <p>or <span class="drop-browse">browse files</span><br />JPG, PNG, WEBP, MP4</p>
+                    </div>
+                </div>
+                <p id="error-input-post"></p>
+
+                <!-- Current Post Preview -->
+                <div class="preview-area" id="previewArea">
+                    <div class="preview-main">
+                        <img id="previewMainImg" src="" alt="" />
+                        <video id="previewMainVid" src="" style="display:none;" autoplay controls muted loop
+                            playsinline></video>
+                        <div class="preview-badge" id="previewBadge"></div>
+
+                        <button class="preview-change">
+                            <input type="file" accept="image/*,video/*" multiple onchange="handleFiles(this.files)" />
+                            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5" stroke-linecap="round">
+                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+                            </svg>
+                            Change
+                        </button>
+                    </div>
+
+                    <!-- All images short previews -->
+                    <div class="thumb-strip" id="thumbStrip">
+
+                        <div class="thumb-add" id="thumbAdd">
+                            <input id="add-more-images-input-field" type="file" accept="image/*,video/*" multiple
+                                onchange="addMore(this.files)" />
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round">
+                                <line x1="12" y1="5" x2="12" y2="19" />
+                                <line x1="5" y1="12" x2="19" y2="12" />
+                            </svg>
+                            <span>Add</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CAPTION -->
+                <div class="caption-box">
+                    <textarea id="captionTxt" placeholder="Write a caption… #hashtags @mentions" maxlength="300"
+                        rows="3" oninput="document.getElementById('capCount').textContent=this.value.length"></textarea>
+                    <div class="caption-footer"><span id="capCount">0</span> / 300</div>
+                </div>
+
+                <!-- CHIPS -->
+                <div class="modal-chips">
+                    <button id="location-add-button" class="m-chip"><svg width="12" height="12" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                            <circle cx="12" cy="10" r="3" />
+                        </svg>Location</button>
+
+                    <button id="tag-people-post" class="m-chip"><svg width="12" height="12" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                            <circle cx="12" cy="7" r="4" />
+                        </svg>Tag People</button>
+                </div>
+
+            </div>
+
+            <div class="modal-foot">
+                <button class="m-btn-cancel" onclick="closeUpload()">Cancel</button>
+                <button class="m-btn-share" id="shareBtn" onclick="submitPost()">
+                    <span class="m-share-label">Share Post</span>
+                    <div class="m-share-spin"></div>
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- show message quick notification -->
+    <div class="toast show display-none" id="toast">
+        <div class="toast-icon"></div>
+        <span>posted successfully</span>
+        <div class="toast-bar"></div>
+    </div>
+
+
+    <!-- POST CARD TEMPLATE -->
+    <template id="postTemplate">
+        <div class="post-card">
+            <div class="post-header">
+                <div class="post-avi pc-avi" data-field="avi">
+                    <img class="profile-photo-post" src="" alt="profile">
+                </div>
+                <div class="post-meta">
+                    <div class="post-username">
+                        <span class="username-profile"></span>
+                        <span class="pc-verified">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                <g id="SVGRepo_iconCarrier">
+                                    <path
+                                        d="M12 2C6.49 2 2 6.49 2 12C2 17.51 6.49 22 12 22C17.51 22 22 17.51 22 12C22 6.49 17.51 2 12 2ZM16.78 9.7L11.11 15.37C10.97 15.51 10.78 15.59 10.58 15.59C10.38 15.59 10.19 15.51 10.05 15.37L7.22 12.54C6.93 12.25 6.93 11.77 7.22 11.48C7.51 11.19 7.99 11.19 8.28 11.48L10.58 13.78L15.72 8.64C16.01 8.35 16.49 8.35 16.78 8.64C17.07 8.93 17.07 9.4 16.78 9.7Z"
+                                        fill="#0073ff"></path>
+                                </g>
+                            </svg>
+                        </span>
+                        <!-- <button class="follow-btn" id="follow-btn-USER_ID" onclick="toggleFollow(this)">
+                            <span class="follow-label">Follow</span>
+                            <div class="follow-particles"></div>
+                        </button> -->
+                    </div>
+                    <div class="post-time pc-time" data-field="time"></div>
+                </div>
+                <button class="pc-menu-btn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <circle cx="12" cy="5" r="1.5" />
+                        <circle cx="12" cy="12" r="1.5" />
+                        <circle cx="12" cy="19" r="1.5" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- CAROUSEL WRAPPER -->
+            <div class="pc-carousel" data-field="carousel">
+                <!-- images injected here by JS -->
+                <div class="pc-carousel-track" data-field="track"></div>
+
+                <!-- prev / next arrows -->
+                <button class="pc-arrow pc-arrow-left" data-field="arrow-left">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round">
+                        <polyline points="15 18 9 12 15 6" />
+                    </svg>
+                </button>
+                <button class="pc-arrow pc-arrow-right" data-field="arrow-right">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round">
+                        <polyline points="9 18 15 12 9 6" />
+                    </svg>
+                </button>
+
+                <!-- dot indicators -->
+                <div class="pc-dots" data-field="dots"></div>
+
+                <!-- image counter badge top-right -->
+                <div class="pc-counter" data-field="counter"></div>
+            </div>
+
+            <div class="pc-actions">
+                <button class="pc-act-btn pc-like-btn" data-field="like-btn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path
+                            d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                    </svg>
+                    <span class="pc-btn-txt" data-field="like-count">0</span>
+                    <div class="pc-btn-spin"></div>
+                </button>
+
+                <button class="pc-act-btn pc-comment-btn" data-field="comment-btn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                    </svg>
+                    <span class="pc-btn-txt" data-field="comment-count">0</span>
+                    <div class="pc-btn-spin"></div>
+                </button>
+            </div>
+
+            <div class="pc-caption" data-field="caption" style="display:none;">
+                <strong data-field="cap-user"></strong>
+                <span data-field="cap-text"></span>
+            </div>
+        </div>
+    </template>
+
+    <!-- Comment Template List -->
+    <template id="commentTemplate">
+        <div class="comment-item">
+            <div class="comment-item-head">
+                <div class="comment-avi">
+                    <img src="" alt="profile" />
+                    <div class="comment-meta-top">
+                        <div class="comment-user"></div>
+                        <p class="comment-time-txt"></p>
+                    </div>
+                </div>
+                <div class="comment-body">
+                    <p class="comment-text">This is my comment umar. name is Muhammad umar</p>
+                </div>
+                <div class="comment-footer">
+                    <button class="pc-act-btn pc-like-btn like-comment liked">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                            </path>
+                        </svg>
+                        <span class="pc-btn-txt" data-field="like-count"
+                            id="like-post-69ceac67fe034ddf0e1a8990">2</span>
+                        <div class="pc-btn-spin"></div>
+                    </button>
+                    <button class="reply-btn" onclick="setReply()">
+                        Reply
+                    </button>
+                </div>
+            </div>
+            <div class="replies-container">view <span class="number-repiles-on-comment"></span> replies </div>
+        </div>
+    </template>
+    <!-- script files -->
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
+    <script src="./javascripts/hepler/feed.helper.js"></script>
+    <script src="./javascripts/hepler/time.helper.js"></script>
+    <script src="./javascripts/hepler/feed.socket.js"></script>
+    <script src="./javascripts/hepler/likeHelper.js"></script>
+    <script src="./javascripts/hepler/comment.helper.js"></script>
+    <script src="./javascripts/feed.js"></script>
+</body>
+
+</html>
