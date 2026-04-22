@@ -592,18 +592,6 @@ input:focus {
     }
 }
 
-.cb-dot {
-    animation: cb-blink 1.2s infinite;
-}
-
-.cb-dot:nth-child(2) {
-    animation-delay: 0.2s;
-}
-
-.cb-dot:nth-child(3) {
-    animation-delay: 0.4s;
-}
-
 .auth-change {
     text-align: center;
     margin-top: 20px;

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en" data-chat-theme="dark">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chatterra – Messages</title>
+    <link rel="stylesheet" href="stylesheets/chat.css" />
+    <link rel="stylesheet" href="stylesheets/chat-theme.css" />
+</head>
+
+<body>
+
+    <div class="chat-app">
+
+        <!-- ════════════════════════════
+       SIDEBAR — conversation list
+  ════════════════════════════ -->
+        <aside class="chat-sidebar" id="chatSidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-header-top">
+                    <div class="header-message">
+                        <svg onclick="window.location.href='/feed.html'" width="30px" height="30px" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"
+                            fill="#000000">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <path fill="var(--ct-text-pri)" d="M224 480h640a32 32 0 1 1 0 64H224a32 32 0 0 1 0-64z"></path>
+                                <path fill="var(--ct-text-pri)"
+                                    d="m237.248 512 265.408 265.344a32 32 0 0 1-45.312 45.312l-288-288a32 32 0 0 1 0-45.312l288-288a32 32 0 1 1 45.312 45.312L237.248 512z">
+                                </path>
+                            </g>
+                        </svg>
+                        <span class="sidebar-username">Messages</span>
+                    </div>
+                    <div class="sidebar-actions">
+                        <button class="ic-btn" title="New message"
+                            onclick="ChatUtils.showToast('New message coming soon!')">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 20h9" />
+                                <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+                            </svg>
+                        </button>
+                        <button class="ic-btn" title="Settings" onclick="ChatSettings.open()">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="3" />
+                                <path
+                                    d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="search-wrap">
+                    <span class="search-icon">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round">
+                            <circle cx="11" cy="11" r="8" />
+                            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                        </svg>
+                    </span>
+                    <input type="text" id="searchInput" placeholder="Search" />
+                </div>
+            </div>
+
+            <!-- conversation list -->
+            <div class="conv-list" id="convList"></div>
+
+        </aside>
+
+        <!-- ════════════════════════════
+       CHAT AREA
+  ════════════════════════════ -->
+        <div class="chat-area">
+
+            <!-- empty state (no conversation selected) -->
+            <div class="chat-empty" id="chatEmpty">
+                <div class="chat-empty-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                    </svg>
+                </div>
+                <h3>Your Messages</h3>
+                <p>Select a conversation to start chatting</p>
+            </div>
+
+            <!-- chat header -->
+            <div class="chat-header" id="chatHeader" style="display:none;">
+                <button class="ic-btn" style="display:none;" id="mobileBack" onclick="closeChatMobile()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round">
+                        <polyline points="15 18 9 12 15 6" />
+                    </svg>
+                </button>
+                <div class="chat-header-avi" id="chatHeaderAvi"></div>
+                <div class="chat-header-info" onclick="ChatSettings.open()">
+                    <div class="chat-header-name" id="chatHeaderName"></div>
+                    <div class="chat-header-status" id="chatHeaderStatus"></div>
+                </div>
+                <div class="chat-header-actions">
+                    <button class="ic-btn" title="Voice call" onclick="ChatUtils.showToast('Voice call coming soon!')">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.62 3.38 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.85a16 16 0 0 0 6 6l.86-.86a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+                        </svg>
+                    </button>
+                    <button class="ic-btn" title="Video call" onclick="ChatUtils.showToast('Video call coming soon!')">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="23 7 16 12 23 17 23 7" />
+                            <rect x="1" y="5" width="15" height="14" rx="2" />
+                        </svg>
+                    </button>
+                    <button class="ic-btn" title="Chat info" onclick="ChatSettings.open()">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10" />
+                            <line x1="12" y1="8" x2="12" y2="12" />
+                            <line x1="12" y1="16" x2="12.01" y2="16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- inner chat (messages + input) -->
+            <div id="chatAreaInner"
+                style="display:none;flex:1;flex-direction:column;min-height:0;overflow:hidden;display:none;">
+
+                <!-- messages -->
+                <div class="messages-wrap" id="messagesWrap"></div>
+
+                <!-- input area -->
+                <div class="chat-input-area" style="position:relative;">
+
+                    <!-- emoji panel -->
+                    <div class="emoji-panel" id="emojiPanel"></div>
+
+                    <!-- reply bar -->
+                    <div class="reply-bar" id="replyBar">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round">
+                            <polyline points="9 17 4 12 9 7" />
+                            <path d="M20 18v-2a4 4 0 0 0-4-4H4" />
+                        </svg>
+                        <div style="flex:1;min-width:0;">
+                            <span class="reply-bar-user" id="replyBarUser"
+                                style="color:var(--ct-accent);font-size:12px;font-weight:600;display:block;"></span>
+                            <span class="reply-bar-text" id="replyBarText"
+                                style="font-size:12.5px;color:var(--ct-text-sec);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block;"></span>
+                        </div>
+                        <button class="reply-close" onclick="ChatInput.clearReply()">×</button>
+                    </div>
+
+                    <!-- input row -->
+                    <div class="input-row">
+                        <div class="input-box">
+                            <div class="input-icons">
+                                <button class="inp-ic-btn" id="emojiBtn" title="Emoji">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <circle cx="12" cy="12" r="10" />
+                                        <path d="M8 14s1.5 2 4 2 4-2 4-2" />
+                                        <line x1="9" y1="9" x2="9.01" y2="9" />
+                                        <line x1="15" y1="9" x2="15.01" y2="9" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <textarea id="msgInput" placeholder="Message..." rows="1"></textarea>
+                            <div class="input-icons">
+                                <button class="inp-ic-btn" id="mediaBtn" title="Photo/Video">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <rect x="3" y="3" width="18" height="18" rx="3" />
+                                        <circle cx="8.5" cy="8.5" r="1.5" />
+                                        <polyline points="21 15 16 10 5 21" />
+                                    </svg>
+                                </button>
+                                <button class="inp-ic-btn" title="Voice message"
+                                    onclick="ChatUtils.showToast('Voice message coming soon!')">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
+                                        <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+                                        <line x1="12" y1="19" x2="12" y2="23" />
+                                        <line x1="8" y1="23" x2="16" y2="23" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <input type="file" id="mediaInput" accept="image/*,video/*" multiple />
+
+                        <!-- send button (shown when text exists) -->
+                        <button class="send-btn" id="sendBtn" style="display:none;">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="22" y1="2" x2="11" y2="13" />
+                                <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                            </svg>
+                        </button>
+
+                        <!-- like button (shown when input is empty) -->
+                        <button class="like-send-btn" id="likeSendBtn">❤️</button>
+                    </div>
+
+                </div>
+            </div>
+
+        </div><!-- /chat-area -->
+
+        <!-- ════════════════════════════
+       SETTINGS PANEL
+  ════════════════════════════ -->
+        <aside class="settings-panel" id="settingsPanel"></aside>
+
+    </div><!-- /chat-app -->
+
+    <!-- IMAGE LIGHTBOX -->
+    <div class="lightbox" id="lightbox" onclick="this.classList.remove('open')">
+        <img id="lightboxImg" src="" alt="" />
+        <button class="lightbox-close"
+            onclick="event.stopPropagation();document.getElementById('lightbox').classList.remove('open')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round">
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+        </button>
+    </div>
+
+    <!-- JS MODULES — order matters -->
+    <script src="chatJS/chat-state.js"></script>
+    <script src="chatJS/chat-utils.js"></script>
+    <script src="chatJS/chat-sidebar.js"></script>
+    <script src="chatJS/chat-messages.js"></script>
+    <script src="chatJS/chat-input.js"></script>
+    <script src="chatJS/chat-setting.js"></script>
+
+    <script>
+        // ════════════════════════════════════════
+        // MAIN — wires everything together
+        // ════════════════════════════════════════
+        let DEFAULT_PROFILE_IMAGE = "https://res.cloudinary.com/deklbsgkm/image/upload/default_Photo_insta_iz3kev.jpg"
+        window.addEventListener('DOMContentLoaded', () => {
+
+            // init sidebar
+            ChatSidebar.init(onConversationSelect);
+
+
+            // init input
+            // this is very important when creating the chats
+            ChatInput.init();
+
+
+            // apply saved theme
+            document.documentElement.setAttribute('data-chat-theme', ChatState.settings.theme);
+
+            // mobile back button visibility
+            checkMobile();
+            window.addEventListener('resize', checkMobile);
+        });
+
+        // ── SELECT A CONVERSATION ──
+
+        // this fucntion is very important when the calls on chats are openned in a sync way 
+        // >>>>>>>>>>>>>>>>>>>>>>> 
+        function onConversationSelect(convId) {
+
+
+            ChatState.setActiveConv(convId);    // default converstation will be sent null
+            ChatState.markAllRead(convId);      //
+
+            const conv = ChatState.getConv(convId);
+
+            // update header + show chat area
+            ChatMessages.updateHeader(conv);
+
+
+            // >>>> important
+            {
+                //  both these things are important only when we get the message 
+                // or send then it should be on top other wise not 
+
+                // update sidebar active state + preview
+                ChatSidebar.setActive(convId);
+                ChatSidebar.updatePreview(convId);
+            }
+
+            // render messages >>>> rendering the messages 
+            ChatMessages.renderAll(convId);
+
+            // show chat area inner
+            const inner = document.getElementById('chatAreaInner');
+            if (inner) inner.style.display = 'flex';
+
+            // close settings if open
+            ChatSettings.close();
+
+            // focus input
+            setTimeout(() => document.getElementById('msgInput')?.focus(), 100);
+
+            // mobile: hide sidebar, show chat
+            if (window.innerWidth <= 900) {
+                document.getElementById('chatSidebar').classList.remove('mobile-open');
+                document.getElementById('mobileBack').style.display = 'flex';
+            }
+        }
+
+        // ── MOBILE ──
+        function checkMobile() {
+            const isMobile = window.innerWidth <= 900;
+            const sidebar = document.getElementById('chatSidebar');
+            const back = document.getElementById('mobileBack');
+
+            if (isMobile) {
+                if (!ChatState.getActiveId()) sidebar.classList.add('mobile-open');
+                if (back) back.style.display = ChatState.getActiveId() ? 'flex' : 'none';
+            } else {
+                sidebar.classList.remove('mobile-open');
+                if (back) back.style.display = 'none';
+            }
+        }
+
+        function closeChatMobile() {
+            ChatState.setActiveConv(null);
+            ChatMessages.updateHeader(null);
+            document.getElementById('chatSidebar').classList.add('mobile-open');
+            document.getElementById('mobileBack').style.display = 'none';
+            ChatSidebar.render();
+        }
+    </script>
+
+</body>
+
+</html>

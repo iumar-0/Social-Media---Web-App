@@ -1,0 +1,139 @@
+/* ════════════════════════════════════════
+   CHAT THEMES
+   Applied via data-chat-theme on <html>
+════════════════════════════════════════ */
+
+/* ── DEFAULT (Instagram light) ── */
+[data-chat-theme="default"] {
+    --ct-bg: #fafafa;
+    --ct-surface: #ffffff;
+    --ct-sidebar-bg: #ffffff;
+    --ct-border: #efefef;
+    --ct-text-pri: #111111;
+    --ct-text-sec: #737373;
+    --ct-text-muted: #aaaaaa;
+    --ct-input-bg: #efefef;
+    --ct-sent-bg: #0095f6;
+    --ct-sent-text: #ffffff;
+    --ct-recv-bg: #efefef;
+    --ct-recv-text: #111111;
+    --ct-accent: #0095f6;
+    --ct-accent-light: #e8f4fd;
+    --ct-hover: #fafafa;
+    --ct-active: #efefef;
+    --ct-online: #44b700;
+    --ct-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    --ct-overlay: rgba(255, 255, 255, 0.9);
+    --ct-header-bg: #ffffff;
+    --ct-icon: #262626;
+    --ct-reaction-bg: #ffffff;
+    --ct-scrollbar: #dbdbdb;
+}
+
+/* ── DARK ── */
+[data-chat-theme="dark"] {
+    --ct-bg: #000000;
+    --ct-surface: #1a1a1a;
+    --ct-sidebar-bg: #0d0d0d;
+    --ct-border: #262626;
+    --ct-text-pri: #f5f5f5;
+    --ct-text-sec: #a8a8a8;
+    --ct-text-muted: #555555;
+    --ct-input-bg: #262626;
+    --ct-sent-bg: #0095f6;
+    --ct-sent-text: #ffffff;
+    --ct-recv-bg: #262626;
+    --ct-recv-text: #f5f5f5;
+    --ct-accent: #0095f6;
+    --ct-accent-light: #0d2233;
+    --ct-hover: #1a1a1a;
+    --ct-active: #262626;
+    --ct-online: #44b700;
+    --ct-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    --ct-overlay: rgba(0, 0, 0, 0.85);
+    --ct-header-bg: #0d0d0d;
+    --ct-icon: #f5f5f5;
+    --ct-reaction-bg: #1a1a1a;
+    --ct-scrollbar: #333333;
+}
+
+/* ── OCEAN ── */
+[data-chat-theme="ocean"] {
+    --ct-bg: #e8f4f8;
+    --ct-surface: #ffffff;
+    --ct-sidebar-bg: #f0f8fc;
+    --ct-border: #cce8f4;
+    --ct-text-pri: #0a3045;
+    --ct-text-sec: #4a7a96;
+    --ct-text-muted: #8ab0c2;
+    --ct-input-bg: #e8f4f8;
+    --ct-sent-bg: #0077b6;
+    --ct-sent-text: #ffffff;
+    --ct-recv-bg: #cce8f4;
+    --ct-recv-text: #0a3045;
+    --ct-accent: #0077b6;
+    --ct-accent-light: #d6eef8;
+    --ct-hover: #dff0f8;
+    --ct-active: #cce8f4;
+    --ct-online: #00b894;
+    --ct-shadow: 0 4px 20px rgba(0, 119, 182, 0.12);
+    --ct-overlay: rgba(232, 244, 248, 0.92);
+    --ct-header-bg: #f0f8fc;
+    --ct-icon: #0077b6;
+    --ct-reaction-bg: #ffffff;
+    --ct-scrollbar: #b8d8e8;
+}
+
+/* ── ROSE ── */
+[data-chat-theme="rose"] {
+    --ct-bg: #fff5f7;
+    --ct-surface: #ffffff;
+    --ct-sidebar-bg: #fff8f9;
+    --ct-border: #f8d7e0;
+    --ct-text-pri: #3d0a16;
+    --ct-text-sec: #8b3a4f;
+    --ct-text-muted: #c4849a;
+    --ct-input-bg: #fde8ed;
+    --ct-sent-bg: #e91e63;
+    --ct-sent-text: #ffffff;
+    --ct-recv-bg: #fde8ed;
+    --ct-recv-text: #3d0a16;
+    --ct-accent: #e91e63;
+    --ct-accent-light: #fde8ed;
+    --ct-hover: #fef0f3;
+    --ct-active: #fde8ed;
+    --ct-online: #4caf50;
+    --ct-shadow: 0 4px 20px rgba(233, 30, 99, 0.10);
+    --ct-overlay: rgba(255, 245, 247, 0.92);
+    --ct-header-bg: #fff8f9;
+    --ct-icon: #e91e63;
+    --ct-reaction-bg: #ffffff;
+    --ct-scrollbar: #f4b8cc;
+}
+
+/* ── MIDNIGHT ── */
+[data-chat-theme="midnight"] {
+    --ct-bg: #0f0f23;
+    --ct-surface: #1a1a3e;
+    --ct-sidebar-bg: #0f0f23;
+    --ct-border: #2a2a5c;
+    --ct-text-pri: #e8e8ff;
+    --ct-text-sec: #9898cc;
+    --ct-text-muted: #4a4a7a;
+    --ct-input-bg: #2a2a5c;
+    --ct-sent-bg: #7c4dff;
+    --ct-sent-text: #ffffff;
+    --ct-recv-bg: #2a2a5c;
+    --ct-recv-text: #e8e8ff;
+    --ct-accent: #7c4dff;
+    --ct-accent-light: #1f1f4a;
+    --ct-hover: #1a1a3e;
+    --ct-active: #2a2a5c;
+    --ct-online: #69f0ae;
+    --ct-shadow: 0 4px 20px rgba(124, 77, 255, 0.2);
+    --ct-overlay: rgba(15, 15, 35, 0.92);
+    --ct-header-bg: #0f0f23;
+    --ct-icon: #bb86fc;
+    --ct-reaction-bg: #1a1a3e;
+    --ct-scrollbar: #2a2a5c;
+}

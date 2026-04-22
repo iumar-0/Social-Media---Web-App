@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chatterra – Feed</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@300;400;500;600&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="./stylesheets/home.css">
+</head>
+
+<body>
+    <div class="app">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sb-logo">Chatterra</div>
+            <nav class="sb-nav">
+                <button class="sb-item active">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                        <polyline points="9 22 9 12 15 12 15 22" />
+                    </svg>
+                    Home
+                </button>
+                <button class="sb-item" onclick="alert('Messages page coming soon!')">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                    </svg>
+                    Messages
+                </button>
+            </nav>
+            <div class="sb-bottom">
+                <div class="sb-item" style="cursor:default;">
+                    <div
+                        style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#6d28d9,#a855f7);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:13px;flex-shrink:0;">
+                        U</div>
+                    <div>
+                        <div style="font-size:13px;font-weight:600;color:var(--text-pri);">You</div>
+                        <div style="font-size:11px;color:var(--text-muted);">@yourhandle</div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- MAIN -->
+        <div class="main">
+
+            <!-- TOPBAR -->
+            <header class="topbar">
+                <span class="topbar-left">Home</span>
+                <div class="topbar-right">
+                    <button class="theme-btn" onclick="toggleTheme()" title="Toggle theme">
+                        <svg id="theme-icon" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="5" />
+                            <line x1="12" y1="1" x2="12" y2="3" />
+                            <line x1="12" y1="21" x2="12" y2="23" />
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                            <line x1="1" y1="12" x2="3" y2="12" />
+                            <line x1="21" y1="12" x2="23" y2="12" />
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+                        </svg>
+                    </button>
+                    <button class="post-btn" onclick="openUpload()">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round">
+                            <line x1="12" y1="5" x2="12" y2="19" />
+                            <line x1="5" y1="12" x2="19" y2="12" />
+                        </svg>
+                        New Post
+                    </button>
+                </div>
+            </header>
+
+            <!-- FEED -->
+            <div class="feed" id="feed">
+                <!-- EMPTY STATE -->
+                <div class="empty-feed" id="emptyFeed">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.5">
+                        <rect x="3" y="3" width="18" height="18" rx="3" />
+                        <circle cx="8.5" cy="8.5" r="1.5" />
+                        <polyline points="21 15 16 10 5 21" />
+                    </svg>
+                    <p>No posts yet. Be the first to share something!</p>
+                </div>
+
+                <div class="user-post-main-div">
+
+                </div>
+
+                <div id="skeleton-cards-load">
+                    <!-- SKELETON x3 -->
+                    <div class="skel-card" id="sk1">
+                        <div class="skel-header">
+                            <div class="skeleton skel-avatar"></div>
+                            <div class="skel-name-block">
+                                <div class="skeleton skel-name"></div>
+                                <div class="skeleton skel-time"></div>
+                            </div>
+                        </div>
+                        <div class="skeleton skel-image"></div>
+                        <div class="skel-actions">
+                            <div class="skeleton skel-btn"></div>
+                            <div class="skeleton skel-btn"></div>
+                        </div>
+                        <div class="skel-caption">
+                            <div class="skeleton skel-line-full"></div>
+                            <div class="skeleton skel-line-half"></div>
+                        </div>
+                    </div>
+
+                    <div class="skel-card" id="sk2">
+                        <div class="skel-header">
+                            <div class="skeleton skel-avatar"></div>
+                            <div class="skel-name-block">
+                                <div class="skeleton skel-name"></div>
+                                <div class="skeleton skel-time"></div>
+                            </div>
+                        </div>
+                        <div class="skeleton skel-image"></div>
+                        <div class="skel-actions">
+                            <div class="skeleton skel-btn"></div>
+                            <div class="skeleton skel-btn"></div>
+                        </div>
+                        <div class="skel-caption">
+                            <div class="skeleton skel-line-full"></div>
+                            <div class="skeleton skel-line-half"></div>
+                        </div>
+                    </div>
+
+                    <div class="skel-card" id="sk3">
+                        <div class="skel-header">
+                            <div class="skeleton skel-avatar"></div>
+                            <div class="skel-name-block">
+                                <div class="skeleton skel-name"></div>
+                                <div class="skeleton skel-time"></div>
+                            </div>
+                        </div>
+                        <div class="skeleton skel-image"></div>
+                        <div class="skel-actions">
+                            <div class="skeleton skel-btn"></div>
+                            <div class="skeleton skel-btn"></div>
+                        </div>
+                        <div class="skel-caption">
+                            <div class="skeleton skel-line-full"></div>
+                            <div class="skeleton skel-line-half"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- COMMENT OVERLAY + DRAWER -->
+    <!-- <div class="comment-overlay" id="commentOverlay" onclick="closeComments()"></div>
+    <div class="comment-drawer" id="commentDrawer">
+        <div class="drawer-handle"></div>
+        <div class="drawer-title">Comments</div>
+        <div class="comments-list" id="commentsList">
+            <div class="comments-empty" id="commentsEmpty">No comments yet. Be the first!</div>
+        </div>
+        <div class="drawer-input">
+            <textarea id="commentInput" placeholder="Add a comment…" rows="1" oninput="autoResize(this)"
+                onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendComment();}"></textarea>
+            <button class="send-btn" onclick="sendComment()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="22" y1="2" x2="11" y2="13" />
+                    <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                </svg>
+            </button>
+        </div>
+    </div> -->
+
+
+    <div class="comment-overlay" id="commentOverlay" onclick="closeComments()"></div>
+
+    <div class="comment-drawer" id="commentDrawer">
+        <div class="drawer-handle"></div>
+
+        <div class="drawer-title">
+            Comments <span id="drawerCommentCount"
+                style="font-size:13px;font-weight:400;color:var(--text-muted);margin-left:6px;"></span>
+        </div>
+
+        <!-- comments list -->
+        <div class="comments-list" id="commentsList">
+            <div class="comments-empty" id="commentsEmpty">No comments yet. Be the first!</div>
+
+            <!-- comment template -->
+            <template id="comment-template">
+                <div class="comment-item">
+                    <div class="comment-avi" data-field="initials"></div>
+                    <div class="comment-body">
+                        <div class="comment-user" data-field="username"></div>
+                        <div class="comment-text" data-field="text"></div>
+                        <div class="comment-time" data-field="time"></div>
+                    </div>
+                </div>
+            </template>
+
+        </div>
+
+        <!-- loading spinner inside drawer -->
+        <div id="commentsLoading" style="display:none; text-align:center; padding:20px 0;">
+            <div class="drawer-spinner"></div>
+        </div>
+
+        <!-- input -->
+        <div class="drawer-input">
+            <textarea id="commentInput" placeholder="Add a comment…" rows="1" oninput="autoResize(this)"
+                onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendComment();}">
+        </textarea>
+            <button class="send-btn" id="sendBtn" onclick="sendComment()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="22" y1="2" x2="11" y2="13" />
+                    <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                </svg>
+            </button>
+        </div>
+    </div>
+    <!-- UPLOAD MODAL -->
+    <div class="modal-overlay" id="modalOverlay" onclick="handleModalOutside(event)">
+        <div class="modal" id="uploadModal">
+            <div class="modal-header">
+                <h2>New Post</h2>
+                <button class="modal-close" onclick="closeUpload()">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round">
+                        <line x1="18" y1="6" x2="6" y2="18" />
+                        <line x1="6" y1="6" x2="18" y2="18" />
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="drop-zone" id="dropZone">
+                    <input type="file" id="fileInput" accept="image/*" multiple onchange="handleFiles(this.files)" />
+                    <!-- <div class="drop-inner" id="dropInner">
+                        <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                            style="color:var(--text-muted)">
+                            <rect x="3" y="3" width="18" height="18" rx="3" />
+                            <circle cx="8.5" cy="8.5" r="1.5" />
+                            <polyline points="21 15 16 10 5 21" />
+                        </svg>
+                        <p class="drop-label">Click to upload or drag &amp; drop</p>
+                        <p class="drop-sub">PNG, JPG, WEBP &mdash; multiple supported</p>
+                    </div> -->
+                </div>
+                <textarea class="desc-field" id="postDesc" placeholder="Write a caption…" rows="3"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-cancel" onclick="closeUpload()">Cancel</button>
+                <button class="btn-submit" onclick="submitPost()">Share Post</button>
+            </div>
+        </div>
+    </div>
+    <template id="post-template">
+        <div class="post-card">
+
+            <div class="post-header">
+                <div class="post-avatar-placeholder" data-field="initials">
+                    <!-- user profile image -->
+                </div>
+                <div class="post-meta">
+                    <div class="post-username">
+                        <span data-field="username">You</span>
+                        <span class="verified">
+                            <svg width="8" height="8" viewBox="0 0 24 24" fill="white">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                        </span>
+                    </div>
+                    <div class="post-time" data-field="time"></div>
+                </div>
+            </div>
+
+            <div class="post-img-wrap" data-field="images">
+                <!-- images injected here -->
+                <img id="post-img-url" src="" alt="">
+            </div>
+
+            <div class="post-actions">
+                <button class="action-btn like-btn" data-field="like-btn">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path
+                            d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                    </svg>
+                    <span data-field="like-count">0</span>
+                </button>
+
+                <button class="action-btn" data-field="comment-btn">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                    </svg>
+                    <span  data-field="comment-count">0</span>
+                </button>
+            </div>
+
+            <div class="post-caption" data-field="caption">
+                <strong id="caption-username" data-field="caption-username">You</strong>
+                <span id="caption-text" data-field="caption-text"></span>
+            </div>
+
+        </div>
+    </template>
+    <script src="./javascripts/home.js"></script>
+</body>
+
+</html>
